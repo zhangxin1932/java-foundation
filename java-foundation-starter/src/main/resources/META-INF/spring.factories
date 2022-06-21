@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.zy.foundation.starter.ResponseVOAutoConfiguration,\
+  com.zy.foundation.starter.DidGeneratorAutoConfiguration,\
+  com.zy.foundation.starter.SpringUtilsAutoConfiguration

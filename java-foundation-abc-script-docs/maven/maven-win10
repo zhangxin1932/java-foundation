@@ -1,0 +1,20 @@
+0.前提: 安装了 jdk, 并配置好了 jdk 的环境变量
+
+1.下载 maven: 建议去国内镜像源下载
+https://maven.apache.org
+
+2.解压: apache-maven-3.8.5-bin.tar.gz
+比如放到 D:\opt 下
+假设解压后, 目录是 D:\opt\apache-maven-3.8.5-bin
+
+3.设置环境变量:
+3.1 定义 MAVEN_HOME
+新建系统变量:
+变量名是: MAVEN_HOME
+变量值是: D:\opt\apache-maven-3.8.5-bin
+3.2 定义 PATH
+编辑 PATH, 新增一个配置项
+%MAVEN_HOME%\bin
+
+4.验证是否配置成功，执行以下命令
+mvn -version
