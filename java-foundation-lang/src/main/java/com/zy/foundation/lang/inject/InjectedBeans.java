@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @Slf4j
 public final class InjectedBeans {
 
-    private static Map<String, Object> BEAN_MAP = new ConcurrentHashMap<>();
+    private static final Map<String, Object> BEAN_MAP = new ConcurrentHashMap<>();
 
     public static  <T> T getSingletonBean(Class<T> clazz) {
         if (Objects.isNull(clazz)) {
