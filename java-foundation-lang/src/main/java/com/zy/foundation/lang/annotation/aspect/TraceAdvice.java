@@ -1,5 +1,6 @@
 package com.zy.foundation.lang.annotation.aspect;
 
+import com.zy.foundation.lang.annotation.Trace;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -15,8 +16,8 @@ import java.util.Arrays;
 @Slf4j
 public class TraceAdvice {
 
-    @Around("within(Trace) || @annotation(Trace)")
-    public Object around(ProceedingJoinPoint point) throws Throwable {
+    @Around("within(trace) || @annotation(trace)")
+    public Object around(ProceedingJoinPoint point, Trace trace) throws Throwable {
         Object[] args = point.getArgs();
         MethodSignature signature = (MethodSignature) point.getSignature();
         String className = signature.getDeclaringType().getSimpleName();
