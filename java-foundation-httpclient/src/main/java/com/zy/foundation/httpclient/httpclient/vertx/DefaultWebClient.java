@@ -1,7 +1,10 @@
 package com.zy.foundation.httpclient.httpclient.vertx;
 
+import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.ext.web.client.WebClientOptions;
 import io.vertx.rxjava3.core.Vertx;
+import io.vertx.rxjava3.core.eventbus.EventBus;
+import io.vertx.rxjava3.core.eventbus.MessageConsumer;
 import io.vertx.rxjava3.ext.web.client.WebClient;
 
 public final class DefaultWebClient {
@@ -10,6 +13,7 @@ public final class DefaultWebClient {
     private static final int MAX_TOTAL_CONNECTION = 200;
     private static final WebClient WEB_CLIENT;
     private static final WebClientOptions OPTIONS;
+    private static final EventBus EVENT_BUS;
 
     static {
         OPTIONS = new WebClientOptions()
@@ -20,11 +24,21 @@ public final class DefaultWebClient {
                 .setTrustAll(true)
                 .setIdleTimeout(IDLE_TIMEOUT_MILLS)
                 .setKeepAlive(true);
-        WEB_CLIENT = WebClient.create(Vertx.vertx(), OPTIONS);
+        Vertx vertx = Vertx.vertx();
+        WEB_CLIENT = WebClient.create(vertx, OPTIONS);
+        EVENT_BUS = vertx.eventBus();
     }
 
     public static WebClient getInstance() {
         return WEB_CLIENT;
+    }
+
+    public EventBus publish(String address, Object message, DeliveryOptions options) {
+        return EVENT_BUS.publish(address, message, options);
+    }
+
+    public <T> MessageConsumer<T> consumer(String address) {
+        return EVENT_BUS.consumer(address);
     }
 
 }
