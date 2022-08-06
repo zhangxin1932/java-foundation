@@ -1,7 +1,7 @@
 0.前提: 安装了 jdk, 并配置好了 jdk 的环境变量
 
 1.下载 maven: 建议去国内镜像源下载
-https://maven.apache.org
+https://archive.apache.org/dist/maven/maven-3/
 
 2.解压: apache-maven-3.8.5-bin.tar.gz
 比如放到 D:\opt 下
