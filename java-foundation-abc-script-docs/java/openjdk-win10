@@ -1,5 +1,7 @@
 1.openjdk 下载
 https://openjdk.java.net/
+如果下载慢，就去国内公司下载，如
+https://repo.huaweicloud.com/java/jdk/
 
 ```
 Download and install the latest open-source JDK.

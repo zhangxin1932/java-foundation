@@ -1,2 +1,3 @@
 1.清华大学镜像源
 2.阿里巴巴镜像源
+3.https://repo.huaweicloud.com/java/jdk/13+33/
