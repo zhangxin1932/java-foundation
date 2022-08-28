@@ -2,10 +2,7 @@ package com.zy.foundation.lang.rule;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class RuleEngine {
 
@@ -20,7 +17,7 @@ public class RuleEngine {
     public static void ruleMatch(RuleContext ruleContext, String[] sentences) {
         for (Rule rule : Rule.getOrderedRules()) {
             for (int i = 0; i < sentences.length; i++) {
-                String sentence = sentences[i];
+                String sentence = StringUtils.trimToNull(sentences[i]);
                 if (StringUtils.containsIgnoreCase(sentence, rule.getText())) {
                     process(ruleContext, sentences, i, rule.getText());
                     if (StringUtils.isNotBlank(ruleContext.getMatchedSentence())) {
@@ -33,7 +30,7 @@ public class RuleEngine {
 
     public static void nameMatch(RuleContext ruleContext, String[] sentences, String name) {
         for (int i = 0; i < sentences.length; i++) {
-            String sentence = sentences[i];
+            String sentence = StringUtils.trimToNull(sentences[i]);
             if (StringUtils.containsIgnoreCase(sentence, name)) {
                 process(ruleContext, sentences, i, name);
                 if (StringUtils.isNotBlank(ruleContext.getMatchedSentence())) {
@@ -44,8 +41,11 @@ public class RuleEngine {
     }
 
     public static void process(RuleContext ruleContext, String[] sentences, int i, String name) {
-        String sentence = sentences[i];
+        String sentence = StringUtils.trimToNull(sentences[i]);
         String[] sentenceArr = extractWords(sentence);
+        if (Objects.isNull(sentenceArr) || sentenceArr.length == 0) {
+            return;
+        }
         for (int j = 0; j < sentenceArr.length; j++) {
             if (StringUtils.equalsIgnoreCase(sentenceArr[j], name)) {
                 ruleContext.setMatchedSentence(sentence);
@@ -53,8 +53,8 @@ public class RuleEngine {
                 ruleContext.setMatchedLength(sentenceArr.length);
                 ruleContext.setMatchedText(name);
                 // 特殊逻辑：词A 前后 5 个词中没有 xxx
-                String preSentence = i == 0 ? null :sentences[i - 1];
-                String nextSentence = i == sentences.length - 1 ? null :sentences[i + 1];
+                String preSentence = i == 0 ? null : StringUtils.trimToNull(sentences[i - 1]);
+                String nextSentence = i == sentences.length - 1 ? null : StringUtils.trimToNull(sentences[i + 1]);
                 ruleContext.setPreSentence(preSentence);
                 ruleContext.setNextSentence(nextSentence);
 
@@ -81,7 +81,7 @@ public class RuleEngine {
                 // 如果 词A 的下标不是当前句子的最后一个词，则先把当前句子的 词A 之后的词先取完
                 nextSentenceWords.addAll(Arrays.asList(sentenceArr).subList(index + 1, sentenceArr.length));
             }
-            int nextSize = sentenceArr.length - 1 - index;
+            int nextSize = n - (sentenceArr.length - 1 - index);
             // 从下一个句子中取词
             String[] nextSentenceArr = extractWords(nextSentence);
             // 如果下一个句子为空，则直接跳过

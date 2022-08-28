@@ -5,7 +5,21 @@ import org.apache.commons.lang3.StringUtils;
 public class RuleTest {
 
     public static void main(String[] args) {
-        f1();
+        f2();
+    }
+
+    private static void f2() {
+        // String msg = "a b c d e f g. a b c mechanism. a b c d e f g.";
+        // String msg = "a b c d e f g. a b c mechanism mn mk. a b c d e f g.";
+        // String msg = "a b c d e f g. mechanism mn mk t r   . a b c d e f g.";
+        // String msg = "a b c d e f chemotherapy  . mechanism mn mk t r   . a b c d e f g.";
+        // String msg = " f chemotherapy  . mechanism mn mk r   . a .";
+        String msg = "a b c d e f g. general mn mk t r   . a b c d e f g.";
+        String[] sentences = msg.split("\\.");
+        String name = "general";
+        RuleContext ruleContext = new RuleContext();
+        RuleEngine.match(ruleContext, sentences, name);
+        System.out.println(ruleContext.getMatchedSentence());
     }
 
     private static void f1() {
