@@ -1,6 +1,7 @@
 package com.zy.foundation.lang.regex;
 
 import java.util.Objects;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
@@ -21,6 +22,22 @@ public abstract class RegexUtils {
             return false;
         }
         return Pattern.compile(regex).matcher(str).matches();
+    }
+
+    private static void f1() {
+        // String str = "it meet a good endpoint.";
+        String str = "it meet a good endpoint.";
+        Pattern pattern = Pattern.compile("( a .* endpoint([,;. ]))", Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(str);
+        if (matcher.find()) {
+            System.out.println(matcher.start());
+            System.out.println(matcher.end());
+            System.out.println(str.substring(matcher.start(), matcher.end()));
+        }
+    }
+
+    public static void main(String[] args) {
+        f1();
     }
 
 }
