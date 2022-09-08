@@ -36,8 +36,60 @@ public abstract class RegexUtils {
         }
     }
 
+    /**
+     * 非贪婪模式
+     * 贪婪模式
+     */
+    private static void f2() {
+        // String str = "it meet a good endpoint.";
+        String str = "it meet a good endpoint, just a xxx endpoint.";
+        // 非贪婪模式: a good endpoint
+        // Pattern pattern = Pattern.compile("( a .*? endpoint([,;. ]))", Pattern.CASE_INSENSITIVE);
+        // 贪婪模式: a good endpoint, just a xxx endpoint.
+        Pattern pattern = Pattern.compile("( a .* endpoint([,;. ]))", Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(str);
+
+        if (matcher.find()) {
+            System.out.println(matcher.start());
+            System.out.println(matcher.end());
+            System.out.println(str.substring(matcher.start(), matcher.end()));
+        }
+        System.out.println("----------------------------------------------");
+        if (matcher.find(10)) {
+            System.out.println(matcher.start());
+            System.out.println(matcher.end());
+            System.out.println(str.substring(matcher.start(), matcher.end()));
+        }
+    }
+
+    /**
+     * 非贪婪模式
+     * 贪婪模式
+     */
+    private static void f3() {
+        // String str = "it meet a good endpoint.";
+        String str = "you say hello, i say hello.";
+        // 非贪婪模式: a good endpoint
+        // Pattern pattern = Pattern.compile("( a .*? endpoint([,;. ]))", Pattern.CASE_INSENSITIVE);
+        // 贪婪模式: a good endpoint, just a xxx endpoint.
+        Pattern pattern = Pattern.compile("( hello([,;. ]))", Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(str);
+
+        if (matcher.find()) {
+            System.out.println(matcher.start());
+            System.out.println(matcher.end());
+            System.out.println(str.substring(matcher.start(), matcher.end()));
+        }
+        System.out.println("----------------------------------------------");
+        if (matcher.find(10)) {
+            System.out.println(matcher.start());
+            System.out.println(matcher.end());
+            System.out.println(str.substring(matcher.start(), matcher.end()));
+        }
+    }
+
     public static void main(String[] args) {
-        f1();
+        f3();
     }
 
 }
