@@ -88,8 +88,28 @@ public abstract class RegexUtils {
         }
     }
 
+    /**
+     * 包含某些字符串
+     */
+    private static void f4() {
+        Pattern pattern = Pattern.compile("天地玄黄|宇宙洪荒|赵钱孙李", Pattern.CASE_INSENSITIVE);
+        System.out.println(pattern.matcher("天地玄黄ing").find());
+    }
+
+    /**
+     * 不包含某些字符串
+     */
+    private static void f5() {
+        // Pattern pattern = Pattern.compile("^(?!.*?天地玄黄|天地玄).*$", Pattern.CASE_INSENSITIVE);
+        Pattern pattern = Pattern.compile("^(?!.*?天地玄黄).*$", Pattern.CASE_INSENSITIVE);
+        Pattern pattern1 = Pattern.compile("^(?!.*?天地玄).*$", Pattern.CASE_INSENSITIVE);
+        System.out.println(pattern.matcher("天地玄黄ing").find());
+        System.out.println(pattern1.matcher("abc天地玄def, 刚刚").find());
+        System.out.println(pattern1.matcher("天地").find());
+    }
+
     public static void main(String[] args) {
-        f3();
+        f5();
     }
 
 }
