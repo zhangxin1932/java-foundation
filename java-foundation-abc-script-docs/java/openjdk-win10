@@ -45,3 +45,9 @@ https://www.runoob.com/w3cnote/windows10-java-setup.html
 !!! 只有上述 3 个命令都执行成功, 才表示 java 安装配置完成
 !!! 只有上述 3 个命令都执行成功, 才表示 java 安装配置完成
 !!! 只有上述 3 个命令都执行成功, 才表示 java 安装配置完成
+
+5.常见问题
+5.1 java.lang.RuntimeException: Unexpected error: java.security.InvalidAlgorithmParameterException: the trustAnchors parameter must be no
+    n-empty -> [Help 1]
+可以 google 一下。
+https://blog.csdn.net/wushengjun753/article/details/114883662(没啥用)

@@ -18,3 +18,13 @@ https://archive.apache.org/dist/maven/maven-3/
 
 4.验证是否配置成功，执行以下命令
 mvn -version
+
+5.常见问题
+5.1 cannot download sources
+在项目根目录下执行下述命令：
+mvn dependency:resolve -Dclassifier=sources
+如果出现以下错误：
+java.lang.RuntimeException: Unexpected error: java.security.InvalidAlgorithmParameterException: the trustAnchors parameter must be no
+n-empty -> [Help 1]
+则切换命令为：
+mvn dependency:resolve -Dclassifier=sources -Dmaven.wagon.http.ssl.allowall=true -Dmaven.wagon.http.ssl.insecure=true
