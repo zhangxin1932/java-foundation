@@ -29,3 +29,14 @@ docker rm -f containId
 
 https://blog.csdn.net/whatday/article/details/106003836/
 ```
+
+# 3.以 root 身份进入 docker
+
+# 4.docker 容器内缺少相关命令
+```
+1.先执行
+apt-get update
+
+2.安装 vim 命令
+apt-get install vim
+```
