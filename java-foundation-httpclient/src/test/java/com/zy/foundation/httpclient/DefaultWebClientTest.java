@@ -2,8 +2,12 @@ package com.zy.foundation.httpclient;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.zy.foundation.httpclient.httpclient.apache.HttpClients;
+import com.zy.foundation.httpclient.httpclient.apache.HttpProfile;
+import com.zy.foundation.httpclient.httpclient.apache.SimpleHttpClientFactory;
 import com.zy.foundation.httpclient.httpclient.vertx.DefaultWebClient;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.http.impl.client.CloseableHttpClient;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
@@ -13,7 +17,28 @@ import java.util.concurrent.CompletableFuture;
 public class DefaultWebClientTest {
 
     public static void main(String[] args) throws Exception {
-        f2();
+        f4();
+    }
+
+    private static void f5() {
+        String url = "https://mri.cts-mrp.eu/portal/v1/odata/ProductSearch?$filter=(UpdatedAt%20ge%202020-01-01T00%3A00%3A00%2B08%3A00)%20and%20(UpdatedAt%20le%202022-10-22T10%3A09%3A22%2B08%3A00)%20and%20(domainKey%20eq%20%27h%27)&$expand=activeSubstances,atcCodes,cms,documents,doseForms,rms,typeLevel,withdrawalReasons&$count=true&$skip=0&$top=10";
+        CloseableHttpClient httpClient = SimpleHttpClientFactory.buildWithSSLOSecret(HttpProfile.getInstance());
+        String body = HttpClients.doGet(httpClient, url);
+        System.out.println(body);
+    }
+
+    private static void f4() {
+        // 如果访问报错：java.net.UnknownHostException
+        // 则可以在 C:\Windows\System32\drivers\etc\hosts 中构建 ip 到域名的映射，
+        // 如： 192.124.251.50 mri.cts-mrp.eu
+        String url = "https://mri.cts-mrp.eu/portal/v1/odata/ProductSearch?$filter=(UpdatedAt%20ge%202020-01-01T00%3A00%3A00%2B08%3A00)%20and%20(UpdatedAt%20le%202022-10-22T10%3A09%3A22%2B08%3A00)%20and%20(domainKey%20eq%20%27h%27)&$expand=activeSubstances,atcCodes,cms,documents,doseForms,rms,typeLevel,withdrawalReasons&$count=true&$skip=0&$top=";
+        String body = DefaultWebClient.getInstance()
+                .getAbs(url + 10)
+                .putHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:96.0) Gecko/20100101 Firefox/96.0")
+                .rxSend()
+                .blockingGet()
+                .bodyAsString(StandardCharsets.UTF_8.name());
+        System.out.println(body);
     }
 
     /**
