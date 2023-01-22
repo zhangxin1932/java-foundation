@@ -1,5 +1,6 @@
 package com.zy.foundation.lang.utils;
 
+import cn.hutool.core.net.NetUtil;
 import com.zy.foundation.lang.regex.RegexUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -203,4 +204,9 @@ public final class IPTools {
             return 0L;
         }
     }
+
+    public static String getMacAddress() {
+        return NetUtil.getLocalMacAddress();
+    }
+
 }
