@@ -28,3 +28,19 @@ java.lang.RuntimeException: Unexpected error: java.security.InvalidAlgorithmPara
 n-empty -> [Help 1]
 则切换命令为：
 mvn dependency:resolve -Dclassifier=sources -Dmaven.wagon.http.ssl.allowall=true -Dmaven.wagon.http.ssl.insecure=true
+
+5.2 在 pom 中引入依赖之后无法下载且出现下述错误
+java.lang.RuntimeException: Unexpected error: java.security.InvalidAlgorithmParameterException: the trustAnchors parameter must be no
+n-empty -> [Help 1]
+则可行的方式是：
+-Dmaven.multiModuleProjectDirectory=$MAVEN_HOME -Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true -Dmaven.wagon.http.ssl.ignore.validity.dates=true
+方式1：
+在执行的的 maven 命令后，加上上述命令行参数，如：
+maven clean compile -DskipTests=true -Dmaven.multiModuleProjectDirectory=$MAVEN_HOME -Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true -Dmaven.wagon.http.ssl.ignore.validity.dates=true
+方式2：
+在 IDEA 中设置：
+File --> Settings --> 搜索 Runner --> 在 maven 的 vm options 中填上上述命令行参数即可
+
+
+#参考资料
+https://blog.csdn.net/csdn17355456893/article/details/120595168
