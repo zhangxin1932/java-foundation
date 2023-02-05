@@ -55,4 +55,9 @@ yarn config set cache-folder "D:\yarn\cache"
 
 
 
+# 99.常见问题
+## 99.1 Vue 报错error:0308010C:digital envelope routines::unsupported
+https://blog.csdn.net/weixin_65793170/article/details/126884016
+
+
 https://www.cnblogs.com/yzw625/p/15345715.html
