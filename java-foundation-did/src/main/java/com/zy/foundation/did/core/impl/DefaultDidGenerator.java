@@ -12,7 +12,7 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
-import javax.annotation.PostConstruct;
+//import javax.annotation.PostConstruct;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -84,9 +84,11 @@ public class DefaultDidGenerator implements DidGenerator {
         this.dataCenterId = -1L;
         this.sequence = -1L;
         this.workerIdAllocate = workerIdAllocate;
+
+        init();
     }
 
-    @PostConstruct
+    // @PostConstruct
     public void init() {
         // 如果设置了 dataCenterIdBits, 则 dataCenterIdBits 占 4 bit; timeBits 减去 1 bit, workerBits 减去 3 bit
         if (this.dataCenterId >= 0L) {

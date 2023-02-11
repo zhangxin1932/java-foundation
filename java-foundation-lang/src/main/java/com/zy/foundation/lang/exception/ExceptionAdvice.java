@@ -8,7 +8,7 @@ import org.springframework.validation.BindException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
-import javax.xml.bind.ValidationException;
+//import javax.xml.bind.ValidationException;
 import java.text.MessageFormat;
 import java.util.Locale;
 
@@ -35,7 +35,7 @@ public interface ExceptionAdvice {
         ServiceException exception;
         if (e instanceof ServiceException) {
             exception = (ServiceException) e;
-        } else if (e instanceof ValidationException || e instanceof BindException || e instanceof MethodArgumentNotValidException || e instanceof MethodArgumentTypeMismatchException) {
+        } else if (/*e instanceof ValidationException || */e instanceof BindException || e instanceof MethodArgumentNotValidException || e instanceof MethodArgumentTypeMismatchException) {
             exception = ServiceException.INVALID_PARAMS_ERROR;
         } else {
             exception = ServiceException.UNKNOWN_ERROR;

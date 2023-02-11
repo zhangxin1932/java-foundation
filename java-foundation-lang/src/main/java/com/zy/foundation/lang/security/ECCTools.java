@@ -1,8 +1,9 @@
+/*
 package com.zy.foundation.lang.security;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Base64;
-import sun.security.ec.ECKeyPairGenerator;
+//import sun.security.ec.ECKeyPairGenerator;
 
 import javax.crypto.Cipher;
 import javax.crypto.NullCipher;
@@ -20,6 +21,7 @@ import java.security.spec.X509EncodedKeySpec;
 import java.util.HashMap;
 import java.util.Map;
 
+*/
 /**
  * 非对称算法
  * ECC（椭圆加密算法）是一种公钥加密体制
@@ -27,19 +29,22 @@ import java.util.Map;
  * 不过一个缺点是加密和解密操作的实现比其他机制时间长。
  * 它相比RSA算法，对 CPU 消耗严重。
  *
- */
+ *//*
+
 @Slf4j
 public class ECCTools {
     private static final String ALGORITHM = "EC";
     private static final String PUBLIC_KEY = "ECCPublicKey";
     private static final String PRIVATE_KEY = "ECCPrivateKey";
 
-    /**
+    */
+/**
      * 用私钥解密
      * @param data
      * @param key
      * @return
-     */
+     *//*
+
     public static String decrypt(String data, String key) {
         // 对密钥解密
         byte[] keyBytes = Base64.decodeBase64(key);
@@ -59,12 +64,14 @@ public class ECCTools {
         }
     }
 
-    /**
+    */
+/**
      * 用公钥加密
      * @param data
      * @param privateKey
      * @return
-     */
+     *//*
+
     public static String encrypt(byte[] data, String privateKey) {
         // 对公钥解密
         byte[] keyBytes = Base64.decodeBase64(privateKey);
@@ -84,33 +91,39 @@ public class ECCTools {
         }
     }
 
-    /**
+    */
+/**
      * 取得私钥
      * @param keyMap
      * @return
      * @throws Exception
-     */
+     *//*
+
     public static String getPrivateKey(Map<String, Object> keyMap){
         Key key = (Key) keyMap.get(PRIVATE_KEY);
         return Base64.encodeBase64String(key.getEncoded());
     }
 
-    /**
+    */
+/**
      * 取得公钥
      * @param keyMap
      * @return
      * @throws Exception
-     */
+     *//*
+
     public static String getPublicKey(Map<String, Object> keyMap) {
         Key key = (Key) keyMap.get(PUBLIC_KEY);
         return Base64.encodeBase64String(key.getEncoded());
     }
 
-    /**
+    */
+/**
      * 初始化密钥对
      * @param keySize
      * @return
-     */
+     *//*
+
     public static Map<String, Object> initKey(int keySize) {
         try {
             ECKeyPairGenerator generator = new ECKeyPairGenerator();
@@ -130,3 +143,4 @@ public class ECCTools {
         }
     }
 }
+*/

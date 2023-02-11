@@ -6,8 +6,6 @@ import com.zy.foundation.did.enums.DidPattern;
 import com.zy.foundation.did.exception.DidException;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-
-import javax.annotation.PostConstruct;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -62,9 +60,11 @@ public class NumberSegmentDidGenerator implements DidGenerator {
 
     public NumberSegmentDidGenerator(NumberSegmentAllocate numberSegmentAllocate) {
         this.numberSegmentAllocate = numberSegmentAllocate;
+
+        init();
     }
 
-    @PostConstruct
+    // @PostConstruct
     public void init() {
         if (this.quantityPerSegment < 10 || Math.log10((double) this.quantityPerSegment) % 1.0D != 0.0D) {
             log.warn("quantityPerSegment [{}] < 10 或不是 10 的整数次幂, 将其置为了默认值: 1000", this.quantityPerSegment);

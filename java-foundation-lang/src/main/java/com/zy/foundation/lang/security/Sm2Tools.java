@@ -1,3 +1,4 @@
+/*
 package com.zy.foundation.lang.security;
 
 import lombok.extern.slf4j.Slf4j;
@@ -24,13 +25,15 @@ public class Sm2Tools {
 
     private static final String ALGORITHM_NAME = "EC";
 
-    /**
+    */
+/**
      * SM2加密算法
      *
      * @param publicKeyStr 公钥
      * @param data         明文数据
      * @return
-     */
+     *//*
+
     public static String encrypt(String publicKeyStr, String data) {
         Security.addProvider(new BouncyCastleProvider());
         PublicKey publicKey;
@@ -63,13 +66,15 @@ public class Sm2Tools {
         }
     }
 
-    /**
+    */
+/**
      * SM2解密算法
      *
      * @param privateKeyStr 私钥
      * @param cipherData    密文数据
      * @return
-     */
+     *//*
+
     public static String decrypt(String privateKeyStr, String cipherData) {
         PrivateKey privateKey;
         byte[] keyBytes;
@@ -101,11 +106,13 @@ public class Sm2Tools {
         }
     }
 
-    /**
+    */
+/**
      * SM2算法生成密钥对
      *
      * @return 密钥对信息
-     */
+     *//*
+
     public static KeyPair generateSm2KeyPair() {
         try {
             final ECGenParameterSpec sm2Spec = new ECGenParameterSpec("sm2p256v1");
@@ -122,3 +129,4 @@ public class Sm2Tools {
     }
 
 }
+*/
