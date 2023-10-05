@@ -21,4 +21,7 @@ https://github.com/easychen/howto-make-more-money (优雅的挣零花钱)
 7.websocket 在线测试工具
 http://wstool.js.org/
 
-8.
+8.excalidraw (在线画图)
+B 站搜索 Excalidraw
+https://excalidraw.com/
+https://github.com/excalidraw/excalidraw
