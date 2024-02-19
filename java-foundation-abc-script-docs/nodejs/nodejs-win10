@@ -23,7 +23,7 @@ npm get prefix 查看全局安装的位置
 ```
 prefix=D:\node\nodejs\node_global
 cache=D:\node\nodejs\node_cache
-registry=https://registry.npm.taobao.org/
+registry=https://registry.npmmirror.com
 ```
 
 5.3 如果执行上述命令失败或者warn, 则打开powershell, 执行

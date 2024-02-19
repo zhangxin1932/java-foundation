@@ -40,3 +40,8 @@ apt-get update
 2.安装 vim 命令
 apt-get install vim
 ```
+
+# 5.ERROR: missing signature key
+```
+docker 版本过低，需要升级
+```

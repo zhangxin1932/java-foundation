@@ -16,4 +16,17 @@ docker images (查看所有镜像)
 # 查看 docker 中容器的进程
 docker ps
 
+# 查看 docker 容器日志
+docker logs 容器id
+
+```
+
+# 2.常用工具
+```
+# 日志平台
+https://dozzle.dev/
+https://github.com/amir20/dozzle
+
+# web 界面
+portal
 ```
