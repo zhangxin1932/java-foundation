@@ -12,12 +12,12 @@ public class LotteryUtils {
         LocalDate now = LocalDate.now();
         DayOfWeek dayOfWeek = now.getDayOfWeek();
         List<DayOfWeek> doubleColorList = List.of(DayOfWeek.MONDAY, DayOfWeek.WEDNESDAY, DayOfWeek.FRIDAY);
-        List<DayOfWeek> grandLottoList = List.of(DayOfWeek.TUESDAY, DayOfWeek.THURSDAY, DayOfWeek.FRIDAY);
-        // 一三五买，二四日开
+        List<DayOfWeek> grandLottoList = List.of(DayOfWeek.TUESDAY, DayOfWeek.THURSDAY, DayOfWeek.SUNDAY);
+        // 一三五买，二四日开，三五一看结果
         if (doubleColorList.contains(dayOfWeek)) {
             doubleColorBall();
         }
-        // 二四五买，一三六开
+        // 日二四买，一三六开, 二四六看结果
         if (grandLottoList.contains(dayOfWeek)) {
             grandLotto();
         }
