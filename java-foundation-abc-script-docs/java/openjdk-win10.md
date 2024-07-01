@@ -1,3 +1,9 @@
+# 0.Oracle JDK 也是同理的
+```
+下载地址
+https://www.oracle.com/java/technologies/downloads
+```
+
 # 1.openjdk 下载
 ```
 https://openjdk.java.net/
