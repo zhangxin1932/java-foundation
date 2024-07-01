@@ -19,7 +19,7 @@ public class AESToolsTest {
 
     @Test
     public void fn02() {
-        // 这里是常用账号的加密方式, 秘钥存在了脑子里
+        // 这里是常用账号的加密方式, 秘钥关键词：may --> 存在了脑子里
         String key = "***";
         String plaintext = "&&&";
         String encrypt = AESTools.encryptAES(plaintext, key, AESTools.AESType.AES_ECB_128, null);
