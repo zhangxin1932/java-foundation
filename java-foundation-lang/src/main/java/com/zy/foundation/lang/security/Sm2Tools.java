@@ -1,4 +1,3 @@
-/*
 package com.zy.foundation.lang.security;
 
 import lombok.extern.slf4j.Slf4j;
@@ -12,7 +11,6 @@ import org.bouncycastle.jcajce.provider.asymmetric.ec.BCECPrivateKey;
 import org.bouncycastle.jcajce.provider.asymmetric.ec.BCECPublicKey;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.bouncycastle.jce.spec.ECParameterSpec;
-import sun.misc.BASE64Decoder;
 
 import java.nio.charset.StandardCharsets;
 import java.security.*;
@@ -25,21 +23,19 @@ public class Sm2Tools {
 
     private static final String ALGORITHM_NAME = "EC";
 
-    */
-/**
+    /**
      * SM2加密算法
      *
      * @param publicKeyStr 公钥
      * @param data         明文数据
      * @return
-     *//*
-
+     */
     public static String encrypt(String publicKeyStr, String data) {
         Security.addProvider(new BouncyCastleProvider());
         PublicKey publicKey;
         try {
             byte[] keyBytes;
-            keyBytes = (new BASE64Decoder()).decodeBuffer(publicKeyStr);
+            keyBytes = java.util.Base64.getDecoder().decode(publicKeyStr.getBytes(StandardCharsets.UTF_8));
             KeyFactory keyFactory = KeyFactory.getInstance(ALGORITHM_NAME, BouncyCastleProvider.PROVIDER_NAME);
             X509EncodedKeySpec keySpec = new X509EncodedKeySpec(keyBytes);
             publicKey = keyFactory.generatePublic(keySpec);
@@ -66,20 +62,19 @@ public class Sm2Tools {
         }
     }
 
-    */
-/**
+    /**
      * SM2解密算法
      *
      * @param privateKeyStr 私钥
      * @param cipherData    密文数据
      * @return
-     *//*
+     */
 
     public static String decrypt(String privateKeyStr, String cipherData) {
         PrivateKey privateKey;
         byte[] keyBytes;
         try {
-            keyBytes = (new BASE64Decoder()).decodeBuffer(privateKeyStr);
+            keyBytes = java.util.Base64.getDecoder().decode(privateKeyStr.getBytes(StandardCharsets.UTF_8));
             KeyFactory keyFactory = KeyFactory.getInstance(ALGORITHM_NAME, BouncyCastleProvider.PROVIDER_NAME);
             PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(keyBytes);
             privateKey = keyFactory.generatePrivate(keySpec);
@@ -106,12 +101,11 @@ public class Sm2Tools {
         }
     }
 
-    */
-/**
+    /**
      * SM2算法生成密钥对
      *
      * @return 密钥对信息
-     *//*
+     */
 
     public static KeyPair generateSm2KeyPair() {
         try {
@@ -129,4 +123,4 @@ public class Sm2Tools {
     }
 
 }
-*/
+

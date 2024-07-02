@@ -1,28 +1,30 @@
 package com.zy.foundation.lang.security;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.codec.binary.Base64;
 import org.springframework.util.Assert;
 
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.security.*;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * https://docs.oracle.com/javase/8/docs/technotes/guides/security/StandardNames.html#Cipher
+ * <a href="https://docs.oracle.com/javase/8/docs/technotes/guides/security/StandardNames.html#Cipher">Cipher</a>
  * RSA 是可逆的, 既能加密, 也能解密
  * 由于密钥和密文的二进制数据普遍较长，故使用 Base64 而非 HexStr 对字节进行编码
  * 明文数据的字符集为 UTF-8
  * RSA算法是第一个能同时用于加密和数字签名的算法，也易于理解和操作。
  * 参考资源： 
- * https://www.cnblogs.com/pcheng/p/9629621.html
+ * <a href="https://www.cnblogs.com/pcheng/p/9629621.html">Cipher Blog</a>
  */
 @Slf4j
 public class RSATools {
@@ -39,7 +41,7 @@ public class RSATools {
     public static Map<String, Object> initKey(int keySize) {
         try {
             KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance(ALGORITHM);
-            keyPairGen.initialize(keySize < 1024 ? 1024 : keySize);
+            keyPairGen.initialize(Math.max(keySize, 1024));
             KeyPair keyPair = keyPairGen.generateKeyPair();
 
             RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
@@ -64,7 +66,7 @@ public class RSATools {
     public static String getPrivateKey(Map<String, Object> keyMap) {
         Key key = (Key) keyMap.get(PRIVATE_SECRET_KEY);
         byte[] keyBytes = key.getEncoded();
-        return Base64.encodeBase64String(keyBytes);
+        return Base64.getEncoder().encodeToString(keyBytes);
     }
 
     /**
@@ -75,7 +77,7 @@ public class RSATools {
     public static String getPublicKey(Map<String, Object> keyMap) {
         Key key = (Key) keyMap.get(PUBLIC_SECRET_KEY);
         byte[] keyBytes = key.getEncoded();
-        return Base64.encodeBase64String(keyBytes);
+        return Base64.getEncoder().encodeToString(keyBytes);
     }
 
 
@@ -93,11 +95,11 @@ public class RSATools {
         Assert.notNull(data, "data can't be null!");
         Assert.notNull(privateKey, "privateKey can't be null!");
         byte[] dataBytes = data.getBytes(StandardCharsets.UTF_8);
-        byte[] keyBytes = Base64.decodeBase64(privateKey);
+        byte[] keyBytes = Base64.getDecoder().decode(privateKey.getBytes(StandardCharsets.UTF_8));
         byte[] cipherBytes;
         try {
             cipherBytes = encryptByPrivateKey(dataBytes, keyBytes);
-            return Base64.encodeBase64String(cipherBytes);
+            return Base64.getEncoder().encodeToString(cipherBytes);
         } catch (Exception e) {
             log.error("failed to encrypt by private secret key.", e);
             throw new RuntimeException("failed to encrypt by private secret key.");
@@ -137,8 +139,8 @@ public class RSATools {
     public static String decryptByPublicKey(String data, String publicKey) {
         Assert.notNull(data, "data can't be null!");
         Assert.notNull(publicKey, "publicKey can't be null!");
-        byte[] dataBytes = Base64.decodeBase64(data);
-        byte[] keyBytes = Base64.decodeBase64(publicKey);
+        byte[] dataBytes = Base64.getDecoder().decode(data.getBytes(StandardCharsets.UTF_8));
+        byte[] keyBytes = Base64.getDecoder().decode(publicKey.getBytes(StandardCharsets.UTF_8));
         byte[] plainBytes;
         try {
             plainBytes = decryptByPublicKey(dataBytes, keyBytes);
@@ -190,11 +192,11 @@ public class RSATools {
         Assert.notNull(data, "data can't be null!");
         Assert.notNull(publicKey, "publicKey can't be null!");
         byte[] dataBytes = data.getBytes(StandardCharsets.UTF_8);
-        byte[] keyBytes = Base64.decodeBase64(publicKey);
+        byte[] keyBytes = Base64.getDecoder().decode(publicKey.getBytes(StandardCharsets.UTF_8));
         byte[] cipherBytes;
         try {
             cipherBytes = encryptByPublicKey(dataBytes, keyBytes);
-            return Base64.encodeBase64String(cipherBytes);
+            return Base64.getEncoder().encodeToString(cipherBytes);
         } catch (Exception e) {
             log.error("failed to encrypt by private secret key.", e);
             throw new RuntimeException("failed to encrypt by private secret key.");
@@ -234,8 +236,8 @@ public class RSATools {
     public static String decryptByPrivateKey(String data, String privateKey) {
         Assert.notNull(data, "data can't be null!");
         Assert.notNull(privateKey, "privateKey can't be null!");
-        byte[] dataBytes = Base64.decodeBase64(data);
-        byte[] keyBytes = Base64.decodeBase64(privateKey);
+        byte[] dataBytes = Base64.getDecoder().decode(data.getBytes(StandardCharsets.UTF_8));
+        byte[] keyBytes = Base64.getDecoder().decode(privateKey.getBytes(StandardCharsets.UTF_8));
         byte[] plainBytes = decryptByPrivateKey(dataBytes, keyBytes);
         return new String(plainBytes, StandardCharsets.UTF_8);
     }
@@ -280,11 +282,11 @@ public class RSATools {
         Assert.notNull(data, "data can't be null!");
         Assert.notNull(privateKey, "privateKey can't be null!");
         byte[] dataBytes = data.getBytes(StandardCharsets.UTF_8);
-        byte[] keyBytes = Base64.decodeBase64(privateKey);
+        byte[] keyBytes = Base64.getDecoder().decode(privateKey.getBytes(StandardCharsets.UTF_8));
         byte[] signBytes;
         try {
             signBytes = sign(dataBytes, keyBytes);
-            return Base64.encodeBase64String(signBytes);
+            return Base64.getEncoder().encodeToString(signBytes);
         } catch (Exception e) {
             log.error("failed to sign by private secret key.", e);
             throw new RuntimeException("failed to sign by private secret key.");
@@ -329,8 +331,8 @@ public class RSATools {
         Assert.notNull(publicKey, "publicKey can't be null!");
         Assert.notNull(sign, "sign can't be null!");
         byte[] dataBytes = data.getBytes(StandardCharsets.UTF_8);
-        byte[] keyBytes = Base64.decodeBase64(publicKey);
-        byte[] signBytes = Base64.decodeBase64(sign);
+        byte[] keyBytes = Base64.getDecoder().decode(publicKey.getBytes(StandardCharsets.UTF_8));
+        byte[] signBytes = Base64.getDecoder().decode(sign.getBytes(StandardCharsets.UTF_8));
         try {
             return verifySign(dataBytes, keyBytes, signBytes);
         } catch (Exception e) {
@@ -366,4 +368,22 @@ public class RSATools {
     }
 
     ///////////////////// 私钥签名， 公钥验签 结束 ///////////////////////////
+
+    public static void main(String[] args) throws Exception {
+        Map<String, Object> initKey = RSATools.initKey(8192);
+
+        // 公钥加密
+        // String publicKeyEncoded = RSATools.getPublicKey(initKey);
+        String publicKeyEncoded = Files.readString(Paths.get("/00000_custom_project/encrypt/k1"), StandardCharsets.UTF_8);
+        System.out.println("公钥为: " + publicKeyEncoded);
+        String encrypt = RSATools.encryptByPublicKey("monkey", publicKeyEncoded);
+        System.out.println("加密后的密文为: " + encrypt);
+
+        // 私钥解密
+        // String privateKeyEncoded = RSATools.getPrivateKey(initKey);
+        String privateKeyEncoded = Files.readString(Paths.get("/00000_custom_project/encrypt/k2"), StandardCharsets.UTF_8);
+        System.out.println("私钥为: " + privateKeyEncoded);
+        String decrypt = RSATools.decryptByPrivateKey(encrypt, privateKeyEncoded);
+        System.out.println("解密后的明文为: " + decrypt);
+    }
 }

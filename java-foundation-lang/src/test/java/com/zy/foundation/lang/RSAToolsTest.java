@@ -8,7 +8,7 @@ import java.util.Map;
 public class RSAToolsTest {
     @Test
     public void fn01() {
-        Map<String, Object> initKey = RSATools.initKey(1024);
+        Map<String, Object> initKey = RSATools.initKey(8192);
 
         // 公钥加密
         String publicKeyEncoded = RSATools.getPublicKey(initKey);

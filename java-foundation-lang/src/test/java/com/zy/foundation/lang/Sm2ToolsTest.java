@@ -1,9 +1,9 @@
 package com.zy.foundation.lang;
 
 import com.zy.foundation.lang.security.Sm2Tools;
-import org.apache.commons.codec.binary.Base64;
 
 import java.security.KeyPair;
+import java.util.Base64;
 
 public class Sm2ToolsTest {
 
@@ -12,8 +12,8 @@ public class Sm2ToolsTest {
      **/
     public static void main(String[] args) {
         KeyPair keyPair = Sm2Tools.generateSm2KeyPair();
-        String privateKey = Base64.encodeBase64String(keyPair.getPrivate().getEncoded());
-        String publicKey = Base64.encodeBase64String(keyPair.getPublic().getEncoded());
+        String privateKey = Base64.getEncoder().encodeToString(keyPair.getPrivate().getEncoded());
+        String publicKey = Base64.getEncoder().encodeToString(keyPair.getPublic().getEncoded());
 
         System.out.println("公钥：" + publicKey);
         System.out.println("私钥：" + privateKey);
