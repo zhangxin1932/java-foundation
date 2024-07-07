@@ -2,9 +2,10 @@
 
 
 # 3.常用插件
-## 3.1 热加载插件：JRebel and XRebel
+## 3.1 MarsCode
 ```
-需要注册
+豆包旗下
+https://www.marscode.cn/dashboard
 ```
 ## 3.2 uml 插件
 ```
@@ -22,6 +23,7 @@ https://plantuml.com/sequence-diagram
 
 ## 3.n 其他插件
 ```
+#热加载插件：JRebel and XRebel
 #jclasslib (查看字节码文件: view --> show bytecode with jclasslib)
 #Alibaba Java Coding Guidelines
 # BashSupport
