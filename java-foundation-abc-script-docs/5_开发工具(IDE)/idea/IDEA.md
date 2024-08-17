@@ -1,4 +1,8 @@
 
+# 1.下载与破解
+## 1.1 破解方案1(暂时可用 2024-08-17)
+https://blog.csdn.net/weixin_50670076/article/details/136444408
+https://3.jetbra.in/
 
 
 # 3.常用插件

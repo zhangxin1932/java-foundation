@@ -102,7 +102,7 @@ npm config set prefix D:\software\software_for_develop\nvm\v20.15.0\node_global\
 npm config set cache D:\software\software_for_develop\nvm\v20.15.0\node_cache\  //全局包缓存目录，就在node安装目录新建了个nodejs文件夹存放
 npm get prefix 查看全局安装的位置
 ```
-
+ 
 
 # 99.参考资源
 https://github.com/coreybutler/nvm-windows/releases
