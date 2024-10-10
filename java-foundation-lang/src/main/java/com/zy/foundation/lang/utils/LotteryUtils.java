@@ -19,7 +19,7 @@ public class LotteryUtils {
         }
         // 日二四买，一三六开, 二四六看结果
         if (grandLottoList.contains(dayOfWeek)) {
-            doubleColorBall();
+            grandLotto();
         }
     }
 
