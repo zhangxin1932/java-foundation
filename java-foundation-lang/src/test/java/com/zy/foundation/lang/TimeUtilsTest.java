@@ -37,4 +37,10 @@ public class TimeUtilsTest {
         System.out.println(TimeUtils.str2LocalDate1(str));
     }
 
+    @Test
+    public void testOfInstant() {
+        System.out.println(LocalDateTime.now());
+        System.out.println(TimeUtils.ofInstant(LocalDateTime.now()));
+    }
+
 }
