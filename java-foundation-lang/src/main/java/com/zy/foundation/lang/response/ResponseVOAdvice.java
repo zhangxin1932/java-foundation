@@ -11,6 +11,13 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.Objects;
 
+/**
+ * https://blog.csdn.net/asoklove/article/details/131499741
+ * https://www.51cto.com/article/758079.html
+ * 最新的全局异常处理
+ * {@link org.springframework.http.ProblemDetail}
+ *
+ */
 @RestControllerAdvice
 public class ResponseVOAdvice implements ExceptionAdvice {
     private final MessageSource messageSource;
